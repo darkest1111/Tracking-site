@@ -1,72 +1,150 @@
 Swiftparcel
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Package Tracking</title>
+<title>Swift Parcel Tracking</title>
 
 <style>
+
 body{
-    font-family:Arial,sans-serif;
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
     background:#f4f6f8;
 }
+
+/* Header */
+
+.header{
+    background:#ffffff;
+    text-align:center;
+    padding:25px;
+    border-bottom:4px solid #0b5ed7;
+}
+
+.header-logo{
+    width:120px;
+    height:auto;
+    margin-bottom:10px;
+}
+
+.header h1{
+    margin:0;
+    color:#0b5ed7;
+    font-size:36px;
+}
+
+.header p{
+    color:#666;
+    margin-top:8px;
+    font-size:16px;
+}
+
+/* Main Container */
+
 .container{
     max-width:600px;
-    margin:60px auto;
+    margin:40px auto;
     background:#fff;
     padding:30px;
-    border-radius:10px;
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
 }
-input,button{
+
+input{
     width:100%;
-    padding:14px;
-    margin-top:12px;
-    font-size:16px;
+    padding:15px;
+    font-size:18px;
+    margin-top:20px;
+    border:1px solid #ccc;
+    border-radius:8px;
     box-sizing:border-box;
 }
+
 button{
+    width:100%;
+    margin-top:15px;
+    padding:15px;
+    font-size:18px;
+    border:none;
+    border-radius:8px;
     background:#0b5ed7;
     color:white;
-    border:none;
     cursor:pointer;
 }
+
 button:hover{
     background:#084298;
 }
+
 .result{
+    margin-top:25px;
     display:none;
+    padding:20px;
+    border-radius:10px;
     background:#eef7ff;
-    padding:15px;
-    margin-top:20px;
-    border-radius:8px;
 }
+
 .error{
     display:none;
+    margin-top:20px;
     color:red;
-    margin-top:15px;
+    font-weight:bold;
+    text-align:center;
 }
+
+.status{
+    color:green;
+    font-weight:bold;
+}
+
 </style>
 
 </head>
+
 <body>
+
+<!-- Header -->
+
+<header class="header">
+
+    <!-- Replace logo.png with your logo filename -->
+    <img src="swift_parcels_logo.png" alt="Swift Parcel Logo" class="header-logo">
+
+    <h1>Swift Parcel</h1>
+
+    <p>Fast • Secure • Reliable Delivery</p>
+
+</header>
+
+<!-- Tracking Box -->
 
 <div class="container">
 
-<h1>Package Tracking</h1>
+<h2>Track Your Package</h2>
 
-<p>Enter your package number.</p>
+<p>Enter your package number below.</p>
 
-<input id="tracking" placeholder="Package Number">
+<input
+type="text"
+id="tracking"
+placeholder="Enter Package Number">
 
-<button onclick="trackPackage()">Track Package</button>
+<button onclick="trackPackage()">
+Track Package
+</button>
 
 <div class="result" id="result">
+
 <h2>Tracking Details</h2>
 
 <p><strong>Package Number:</strong> <span id="number"></span></p>
 
-<p><strong>Status:</strong> In Transit</p>
+<p><strong>Status:</strong>
+<span class="status">
+In Transit
+</span></p>
 
 <p><strong>Destination Address:</strong></p>
 
@@ -87,22 +165,28 @@ Invalid Package Number.
 
 <script>
 
-const validPackages = ["000617"];
+const validPackages = [
+"000617"
+];
 
 function trackPackage(){
 
 let number = document.getElementById("tracking").value.trim();
 
+let result = document.getElementById("result");
+let error = document.getElementById("error");
+
 if(validPackages.includes(number)){
 
-document.getElementById("number").textContent = number;
-document.getElementById("result").style.display = "block";
-document.getElementById("error").style.display = "none";
+document.getElementById("number").innerHTML = number;
+
+result.style.display = "block";
+error.style.display = "none";
 
 }else{
 
-document.getElementById("result").style.display = "none";
-document.getElementById("error").style.display = "block";
+result.style.display = "none";
+error.style.display = "block";
 
 }
 
